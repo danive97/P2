@@ -34,6 +34,24 @@ public class UserController {
 
     private final AtomicInteger counter = new AtomicInteger();
 
+    @GetMapping("/actualizarid")
+    public void IniciarContador() throws IOException{
+        ArrayList<User> lista_users = GetListausers();
+
+        if(lista_users.size()!=0){
+            int max = 0;
+
+            for (User user : lista_users){
+                if(user.getId()>max){
+                    max = user.getId();
+                }
+            }
+            counter.set(max+1);
+        }
+        else{
+            counter.set(0);
+        }
+    }
 
     @GetMapping("/Getusers")
     public ArrayList<User> Getusers(){
